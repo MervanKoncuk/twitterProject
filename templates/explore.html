@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+
+{% block title %}
+    <title>Twitter | Keşfet</title>
+{% endblock title %}
+    
+
+
+{% block main %}
+    <div class="mt-4">
+        {% for post in posts %}
+            {% include 'partials/_tweet.html' %}
+        {% endfor %}
+    </div>
+    
+        
+{% endblock main %}
+    

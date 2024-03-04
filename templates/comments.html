@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load humanize %}
+
+{% block title %}
+    <title>Twitter | Yorumlar</title>
+{% endblock title %}
+
+
+{% block main %}
+    {% include 'partials/_tweet.html' %}
+
+
+    <!-- Yorum yapma Formu -->
+    <form method="POST" class="mt-3">
+        {% csrf_token %}
+        <input type="text" name="yorumForm" class="px-3 py-2 w-75 rounded-2" placeholder="Yorum Yap" id="">
+        <button type="submit" class="px-3 py-2 rounded-3 bg-secondary border-0" name="commentButton">Yorum Yap</button>
+    </form>
+
+    
+    {% for post in comments %} <!-- posta bağlı olan comment'ları çekmek için : post.comment_set.all -->
+        <div class="row border-top my-2">
+            <div class="col-2 pt-2 ">
+                <img src="{{post.owner.image.url}}" alt="" width="50" height="50" class="rounded-circle me-2">
+              </div>
+              <div class="col-10 pt-2 ">
+                <div>
+                  <a href="{% url 'profile' post.owner.slug %}" class="text-white text-decoration-none fs-5">{{post.owner.name}}</a>
+                  <a class="fs-6 link-secondary text-decoration-none" href="#">@{{post.owner.user.username}}</a>
+                  <a class="fs-6 link-secondary text-decoration-none" href="">・{{post.created_at|naturaltime}}</a>
+                </div>
+                  <div>
+                  <p>@{{post.post.owner.user}} {{post.comment}}</p>
+          
+                  
+          
+                  </div> 
+          </div>
+        </div>
+    {% endfor %}
+        
+    
+{% endblock main %}
+    
+    

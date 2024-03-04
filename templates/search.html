@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+
+{% block main %}
+    <div class="mt-3">
+        
+        {% if durum %}
+            <ul class="list-unstyled">
+                {% for post in posts %}
+                  <li class="my-2">
+                    <a href="{% url 'profile' post.slug %}" class="text-decoration-none border-bottom border-2 border-white text-white fs-4">
+                       <img src="{{post.image.url}}" width="30" height="30" class="rounded-5" alt="">
+                        {{post.name}} - @{{post.user.username}}
+                    </a>
+                  </li>  
+                {% endfor %}
+            </ul>
+        {% else %}
+            {% for post in posts %}
+                {% include 'partials/_tweet.html' %}
+            {% empty %}
+            <h2>No tweets found</h2>
+            {% endfor %}
+        {% endif %}
+            
+        
+
+        
+        
+            
+    </div>
+{% endblock main %}
+    

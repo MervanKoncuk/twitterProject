@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load humanize %}
+
+
+{% block main %}
+    <div class="mt-4">
+        <form method="POST" class="text-end me-3">
+            {% csrf_token %}
+            <input type="submit" value="Okundu" class="btn btn-success">
+        </form>
+        {% for bildirim in bildirimler %}
+            <div class="border-bottom p-3 mb-2">
+                
+                {% if bildirim.isRead == 0 %}
+                    <h4 class="text-danger">Yeni Bildirim</h4>
+                {% endif %}
+                <p>
+                    <a 
+                    
+                    {% if bildirim.action == 'begeni' %}
+                    href="{% url 'comment' bildirim.post.slug %}"
+                    {% elif bildirim.action == 'takip' %}
+                    href="{% url 'profile' bildirim.sender.slug %}"
+                    {% endif %}
+                    
+                    class="text-white"
+                    >
+                       {{bildirim.message}} 
+                    </a>
+                </p>
+                <p>{{bildirim.created_at|naturaltime}}</p>
+            </div>
+        {% endfor %}
+            
+    </div>
+{% endblock main %}
+    
