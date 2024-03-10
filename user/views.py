@@ -11,8 +11,6 @@ from django.core.cache import cache
 
 
 def register(request):
-  
-  
   if request.method == "POST":
     if 'register' in request.POST:
       username = request.POST.get('username')
@@ -189,7 +187,7 @@ def change(request):
   }
   return render(request, 'user/settings.html', context)
 
-
+# Geri dönme fonksiyonu
 def back(request):
   meta = cache.get('meta')
   return redirect(meta)

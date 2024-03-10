@@ -21,6 +21,8 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.views.static import serve
 from posts.views import view_404
+
+
 urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
